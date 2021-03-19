@@ -1,0 +1,62 @@
+.page {
+    width: 780px;
+    margin: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    border: 3px solid yellowgreen;
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px black;
+}
+
+.infophoto{
+    height:150px;
+    margin-left: 30px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.info{
+    float: left;
+}
+
+.photo {
+    float: right;
+}
+
+.section{
+    margin-bottom: 70px;
+    text-align: justify;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sec-left{
+    float: left;
+    font-weight: bold;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.sec-right{
+    margin-left: 200px;
+    margin-top: 37px;
+}
+
+h2{
+    font-size: 28px;
+    border-bottom: 3px solid black;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#for-left p{
+    margin-bottom: 29px;
+}
+
+strong{
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
