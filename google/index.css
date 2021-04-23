@@ -1,0 +1,219 @@
+#nav {
+    display: grid;
+    grid-template-columns: 1fr 50px 50px 50px 100px ; /* ifr ->fill space */
+    grid-template-areas: 
+    ". gmail image menu login";
+    grid-template-rows: 50px;
+    padding-right: 10px;
+
+}
+#gmail {
+    grid-area: gmail;
+    justify-self: center; /* left-right middle */
+    align-self: center;   /* up-down middle */
+}
+#images {
+    grid-area: image;
+    justify-self: center;
+    align-self: center;
+}
+#apps {
+    grid-area: menu;
+    justify-self: center;
+    align-self: center;
+}
+#login {
+    grid-area: login;
+    justify-self: center;
+    align-self: center;
+    background-color: #1a73e8;
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+    text-align: centeR;
+    color: white;
+    font-weight: 500;
+    border: 1px solid #4285f4;
+    font-size: 14px;
+    border-radius: 8%;
+}
+
+#login:hover {
+    text-decoration: none;
+    background-color: #4683ea; 
+}
+
+a {   /* all hyperlinks */
+    text-decoration: none; 
+    color : rgba(0,0,0,0.87);
+    font-family: arial,sans-serif;
+    font-size: 13px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#main {
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 250px 70px 70px;
+    grid-template-areas:
+    ". logo ."
+    ". search ."
+    ". flexbox ."; 
+}
+
+#mainlogo {
+    grid-area: logo;
+    justify-self: center;
+    align-self: end; /* logo at the bot of the gridbox */
+}
+#searchbar {
+    grid-area: search;
+    height: 30px;
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    border-radius: 30px;
+}
+
+#searchbar:hover {
+    box-shadow: 1px 1px 3px grey;
+    border-width: 1.5px;
+}
+
+#searchbar:focus {
+    outline-width: 0;
+    box-shadow: 1px 1px 3px grey;
+    border-width: 1.5px;
+}
+
+#google-search-btn {
+    border: none;
+    font-size: 15px;
+    color: #5F6368;
+    margin-right: 25px;
+    padding: 7px 15px 7px 15px;
+    border-radius: 3px;
+    background-color: #f8f9fa;
+}
+
+#luck-search-btn {
+    border: none;
+    font-size: 15px;
+    color: #5F6368;
+    margin-right: 25px;
+    padding: 7px 15px 7px 15px;
+    border-radius: 3px;
+    background-color: #f8f9fa;
+}
+
+#google-search-btn:hover {
+    border: 1px solid rgba(0, 0, 0, 0.120);
+}
+
+#luck-search-btn:hover {
+    border: 1px solid rgba(0, 0, 0, 0.120);
+}
+
+#flexbox {
+    grid-area: flexbox;
+    justify-self: center;
+    align-self: center;
+}
+
+.footer {
+    border-top: 1px solid #dadce0;
+    display: flex;
+    justify-content: space-between;
+    width: 99%; /* z jakiegos powodu przy 100% nie miesci sie calosc na stronie */
+    bottom: 0;
+    position: absolute;
+    background: #f2f2f2;
+    font-size: 14px;
+}
+
+.above-footer {
+    position: absolute;
+    bottom: 50px;
+    background: #f2f2f2;
+    font-size: 14px;
+    width: 99%;
+    
+}
+
+#left-above-footer {
+    display: grid;
+    grid-template-columns: 90px  1fr;
+    grid-template-rows: 50px;
+    grid-template-areas: "country .";
+}
+
+#country {
+    grid-area: country;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+
+#left-footer {
+    display: grid;
+    grid-template-columns: 90px 90px 90px 150px;
+    grid-template-rows: 50px;
+    grid-template-areas: "about advertising business help";
+}
+
+#about {
+    grid-area: about;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+
+#advert {
+    grid-area: advertising;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+#business {
+    grid-area: business;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+#help {
+    grid-area: help;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+
+#right-footer {
+    display: grid;
+    grid-template-columns: 90px 90px 100px;
+    grid-template-rows: 50px;
+    grid-template-areas: "privacy terms settings";
+}
+
+#privacy {
+    grid-area: privacy;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+#terms {
+    grid-area: terms;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
+#settings {
+    grid-area: settings;
+    justify-self: center;
+    align-self: center;
+    color: #70757a;
+}
