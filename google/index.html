@@ -1,41 +1,386 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Google</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <div id="nav">  
-        <a href="#" id="gmail">Gmail</a>
-        <a href="#" id="images">Grafika</a>
-        <a href="#" id="apps"><img src="aplikacjeLogo.png" height="24" width="24"></a>
-        <a href="#" id="login">Zaloguj się</a>
-    </div>
-    <div id="main">
-        <a href="#" id="mainlogo"><img src="googleNapis.png"></a>
-        <input type="text" id="searchbar">
-        <div id="flexbox">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index2.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="cities.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="first" v-if="mainpage">
+        <div id="nav">
+          <a href="#" id="gmail">Gmail</a>
+          <a href="#" id="images">Grafika</a>
+          <a href="#" id="apps"
+            ><img src="aplikacjeLogo.png" height="24" width="24"
+          /></a>
+          <a href="#" id="login">Zaloguj się</a>
+        </div>
+        <div id="main">
+          <a href="#" id="mainlogo"><img src="googleNapis.png" /></a>
+          <input type="text" id="searchbar-mainpage" v-model="googleSearch" />
+
+          <div id="search-list" v-if="search">
+            <ul id="city-list" style="list-style-type: none">
+              <li
+                class="city-element"
+                v-for="city in filteredCities.slice(0,10)"
+                :key="city.name"
+              >
+                  <div v-on:click="select" class="cityname">
+                    {{ city.name }}
+                  </div>
+              </li>
+            </ul>
+          </div>
+
+          <div id="flexbox">
             <button id="google-search-btn">Szukaj w Google</button>
             <button id="luck-search-btn">Szczęśliwy traf</button>
+          </div>
         </div>
-    </div>
-    <div class="above-footer">
-        <div id="left-above-footer">
+        <div class="above-footer">
+          <div id="left-above-footer">
             <a href="#" id="country">Polska</a>
+          </div>
         </div>
-    </div>
-    <div class="footer">
-        <div id="left-footer">
+        <div class="footer">
+          <div id="left-footer">
             <a href="#" id="about">O nas</a>
             <a href="#" id="advert">Reklamuj się</a>
             <a href="#" id="business">Dla firm</a>
             <a href="#" id="help">Jak działa wyszukiwarka</a>
-        </div>
-        <div id="right-footer">   
+          </div>
+          <div id="right-footer">
             <a href="#" id="privacy">Prywatność</a>
             <a href="#" id="terms">Warunki</a>
             <a href="#" id="settings">Ustawienia</a>
+          </div>
         </div>
-    </div>    
-</body>    
+      </div>
+
+      <div id="results" v-if="results">
+        <div id="header">
+          <div id="topbar">
+            <img id="searchbarimage" src="google_logo.png" />
+            <div id="searchbar">
+              <input id="searchbartext" type="text"/>
+              <button id="X-but">
+                <svg
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  ></path>
+                </svg>
+              </button>
+
+              <button id="searchbarkeyboard">
+                <img src="keyboard.png" />
+              </button>
+
+              <button id="searchbarmic">
+                <svg
+                  class="HPVvwb"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#4285f4"
+                    d="m12 15c1.66 0 3-1.31 3-2.97v-7.02c0-1.66-1.34-3.01-3-3.01s-3 1.34-3 3.01v7.02c0 1.66 1.34 2.97 3 2.97z"
+                  ></path>
+                  <path fill="#34a853" d="m11 18.08h2v3.92h-2z"></path>
+                  <path
+                    fill="#fbbc05"
+                    d="m7.05 16.87c-1.27-1.33-2.05-2.83-2.05-4.87h2c0 1.45 0.56 2.42 1.47 3.38v0.32l-1.15 1.18z"
+                  ></path>
+                  <path
+                    fill="#ea4335"
+                    d="m12 16.93a4.97 5.25 0 0 1 -3.54 -1.55l-1.41 1.49c1.26 1.34 3.02 2.13 4.95 2.13 3.87 0 6.99-2.92 6.99-7h-1.99c0 2.92-2.24 4.93-5 4.93z"
+                  ></path>
+                </svg>
+              </button>
+
+              <button id="searchbarbutton">
+                <svg
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <div id="right_topbar">
+              <button id="menu">
+                <svg class="gb_We" focusable="false" viewBox="0 0 24 24">
+                  <path
+                    d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2z"
+                  ></path>
+                </svg>
+              </button>
+              <button id="login-results">Zaloguj się</button>
+            </div>
+          </div>
+
+          <div id="optionsbar">
+            <ul id="undersearchbar-options">
+              <li id="option-active">Wszystko</li>
+              <li>Grafika</li>
+              <li>Wideo</li>
+              <li>Mapy</li>
+              <li>Wiadomości</li>
+              <li>Więcej</li>
+              <li>Ustawienia</li>
+              <li id="special_hover">Narzędzia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="searchresultsarea">
+          <p id="searchresultsnumber">Około 3 330 000 wyników (0,46 s)</p>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <div class="searchresult">
+            <a>https://www.ktoto.info › numer › 123123123</a> <button>▼</button>
+            <h2>
+              +48 123123123 | Zobacz czyj to numer | Neutralny | KTOTO ...
+            </h2>
+            <p>
+              123123123 CZYJ NUMER? KTO DZWONIŁ Z +48123123123? KTOTO.INFO ☎
+              Telefon
+            </p>
+            <p>
+              123123123 [UWAGA] Sprawdź ten numer zanim odbierzesz! Nie wiesz
+              kto ...
+            </p>
+          </div>
+
+          <ul class="pagelist">
+            <li class="pagelistfirst">1</li>
+            <li class="pagelistnumber">2</li>
+            <li class="pagelistnumber">3</li>
+            <li class="pagelistnumber">4</li>
+            <li class="pagelistnumber">5</li>
+            <li class="pagelistnumber">6</li>
+            <li class="pagelistnumber">7</li>
+            <li class="pagelistnumber">8</li>
+            <li class="pagelistnumber">9</li>
+            <li class="pagelistnumber">10</li>
+            <li id="blank_li"></li>
+            <li class="pagelistnext">Następna</li>
+          </ul>
+        </div>
+
+        <div id="footer-main">
+          <ul id="footerlocation">
+            <li id="country">Polska</li>
+            <li id="special_li">Kraków</li>
+            <li id="li_no_padding">
+              - Z Twojego adresu internetowego - Użyj dokładnej lokalizacji -
+              Dowiedz się więcej
+            </li>
+          </ul>
+
+          <ul id="footermenu">
+            <li>Pomoc</li>
+            <li>Prześlij opinię</li>
+            <li>Prywatność</li>
+            <li>Warunki</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app1 = new Vue({
+        el: "#wrapper",
+        data: {
+          mainpage: true,
+          results: false,
+          search: false,
+          googleSearch: "",
+          cities: window.cities,
+          values: [],
+        },
+        mounted() {
+          window.addEventListener(
+            "keypress",
+            function (e) {
+              char = e.toString();
+              this.googleSearch = this.googleSearch;
+              if (this.googleSearch != "") this.search = true;
+              if (this.googleSearch == "") {
+                this.search = false;
+              }
+            }.bind(this)
+          );
+        },
+        computed: {
+          filteredCities() {
+            return this.cities.filter((city) => {
+              return city.name
+                .toLowerCase()
+                .includes(this.googleSearch.toLowerCase().toString());
+            });
+          },
+        },
+        methods: {
+          onClick: function (event) {
+            if (this.googleSearch != "") {
+              this.mainpage = false;
+              this.results = true;
+            }
+          },
+          select: function (event) {
+            this.values.push(event);
+            this.onClick();
+          },
+        },
+      });
+    </script>
+  </body>
 </html>
