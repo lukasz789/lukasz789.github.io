@@ -62,7 +62,17 @@ a:hover {
     grid-template-areas:
     ". logo ."
     ". search ."
+    ". search-list ."
     ". flexbox ."; 
+}
+
+#search-list {
+    grid-area: search-list;
+    z-index: 100;
+}
+
+#city-list {
+    background-color: white;
 }
 
 #mainlogo {
@@ -70,7 +80,7 @@ a:hover {
     justify-self: center;
     align-self: end; /* logo at the bot of the gridbox */
 }
-#searchbar {
+#searchbar-mainpage {
     grid-area: search;
     height: 30px;
     width: 80%;
@@ -80,12 +90,12 @@ a:hover {
     border-radius: 30px;
 }
 
-#searchbar:hover {
+#searchbar-mainpage:hover {
     box-shadow: 1px 1px 3px grey;
     border-width: 1.5px;
 }
 
-#searchbar:focus {
+#searchbar-mainpage:focus {
     outline-width: 0;
     box-shadow: 1px 1px 3px grey;
     border-width: 1.5px;
